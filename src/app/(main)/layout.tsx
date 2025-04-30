@@ -1,0 +1,26 @@
+"use client"
+
+import React from 'react'
+import ToggleTheme from '@/components/ui/toggle-theme'
+import SideBar from '@/components/container/SideBar'
+
+const MainLayout = () => {
+  return (
+    <div className='h-screen w-full flex flex-col'>
+        <div className='border-b-2 dark:border-[#171717] w-full py-2 px-3 flex justify-between items-center'>
+            <h1 className='font-bold text-lg dark:text-zinc-300 text-zinc-700'>VCommerce</h1>
+            <div className='flex items-center gap-3'>
+                <ToggleTheme />
+                <div className='flex gap-3 items-center'>
+                    <h1 className='text-sm rounded-md px-2 py-1 bg-zinc-100 dark:bg-zinc-800'>John Doe</h1>
+                    <div className='h-[25px] w-[2px] dark:bg-zinc-700 bg-zinc-300'></div>
+                    <h1 className='rounded-full bg-zinc-300 dark:bg-zinc-700 h-[30px] w-[30px] flex items-center justify-center font-semibold'>JD</h1>
+                </div>
+            </div>
+        </div>
+        <SideBar/>
+    </div>
+  )
+}
+
+export default MainLayout
