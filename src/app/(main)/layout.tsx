@@ -4,7 +4,11 @@ import React from 'react'
 import ToggleTheme from '@/components/ui/toggle-theme'
 import SideBar from '@/components/container/SideBar'
 
-const MainLayout = () => {
+type LayoutProps = {
+  children: React.ReactNode
+}
+
+const MainLayout = ({ children }: LayoutProps) => {
   return (
     <div className='h-screen w-full flex flex-col'>
         <div className='border-b-2 dark:border-[#171717] w-full py-2 px-3 flex justify-between items-center'>
@@ -18,7 +22,10 @@ const MainLayout = () => {
                 </div>
             </div>
         </div>
+        <div className='flex w-full h-full'>
         <SideBar/>
+        {children}
+        </div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { LayoutDashboard, Settings } from 'lucide-react'
+import { Bot, LayoutDashboard, Settings } from 'lucide-react'
 import React from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -10,6 +10,11 @@ const sidebar = [
       name: 'Dashboard',
       href: '/dashboard',
       icon: LayoutDashboard,
+    },
+    {
+      name: 'Agents',
+      href: '/agents',
+      icon: Bot,
     },
     {
       name: 'Settings',
@@ -24,7 +29,7 @@ const SideBar = () => {
   return (
     <div className="h-full p-3 flex flex-col gap-3 w-fit border-r-2 dark:border-[#171717]">
       {sidebar.map((item, index) => {
-        const isActive = pathname === item.href
+        const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
         const Icon = item.icon
 
         return (
