@@ -3,12 +3,26 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
-        baseUrl: "/api",
+        baseUrl: 'http://localhost:3000/api',
     }),
     tagTypes: [],
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     endpoints: (builder) => ({
+        createAgent: builder.mutation({
+            query: (data) => ({
+                url: "/agent",
+                method: "POST",
+                body: data,
+            }),
+        }),
+        // getAgents: builder.query({
+        //     query: () => ({
+        //         url: "/agents",
+        //         method: "GET",
+        //     }),
+        // }),
     })
 })
 
-export const {} = api
+export const {
+    useCreateAgentMutation,
+} = api

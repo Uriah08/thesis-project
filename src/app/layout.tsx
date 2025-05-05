@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Poppins } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import StoreProvider from "../providers/redux";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,14 +25,16 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-        {children}
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+            {children}
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
