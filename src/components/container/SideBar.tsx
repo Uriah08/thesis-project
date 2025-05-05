@@ -40,7 +40,7 @@ const SideBar = () => {
               ${isActive ? 'dark:bg-white dark:text-[#171717] text-white bg-[#171717]' : 'hover:bg-zinc-100 dark:hover:bg-[#171717] dark:text-zinc-300 text-zinc-700'}`}
           >
             <Icon size={20} />
-            <h1 className="text-sm">{item.name}</h1>
+            <h1 className="text-sm hidden md:block">{item.name}</h1>
           </Link>
         )
       })}
