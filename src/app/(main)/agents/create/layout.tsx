@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 
 type LayoutProps = {
@@ -5,6 +7,7 @@ type LayoutProps = {
 }
 
 const CreateAgentPage = ({ children }: LayoutProps) => {
+    
   return (
     <div className='flex justify-center w-full h-full'>
         <div className='flex flex-col max-w-[1000px] h-full w-full border-l-2 border-r-2 dark:border-[#171717] p-3'>
