@@ -5,7 +5,7 @@ import React from 'react'
 const AgentPage = () => {
   return (
     <div className='p-3 flex flex-col gap-3'>
-        <Link href='/agents/create'>
+        <Link href='/agents/create/step-1'>
             <Button className='cursor-pointer'>Create Agent</Button>
         </Link>
         <div className='flex flex-wrap'>
