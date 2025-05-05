@@ -19,6 +19,16 @@ export async function POST(req: Request) {
         return NextResponse.json({ message: "Agent Created Successfully!"},{ status: 201 });
     } catch (error) {
         console.error("Error creating agent:", error);
-        return NextResponse.json({ message: "Failed to create agent" }, { status: 500 });
+        return NextResponse.json({ message: "Failed to process" }, { status: 500 });
+    }
+}
+
+export async function GET() {
+    try {
+        const agents = await prisma.agent.findMany();
+        return NextResponse.json({agents, message: "Agent Created Successfully!"},{ status: 201 });
+    } catch (error) {
+        console.error("Error creating agent:", error);
+        return NextResponse.json({ message: "Failed to process" }, { status: 500 });
     }
 }
