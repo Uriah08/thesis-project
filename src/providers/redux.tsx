@@ -29,6 +29,7 @@ import {
 import { PersistGate } from "redux-persist/integration/react";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import { SessionProvider } from "next-auth/react";
+import { ToastProvider } from "@/components/ui/toaster";
 
 
 
@@ -104,6 +105,7 @@ export default function StoreProvider({
       <PersistGate loading={null} persistor={persistor}>
         <SessionProvider>
             {children}
+            <ToastProvider/>
         </SessionProvider>
       </PersistGate>
     </Provider>

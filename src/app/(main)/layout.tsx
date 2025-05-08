@@ -5,15 +5,22 @@ import ToggleTheme from '@/components/ui/toggle-theme'
 import SideBar from '@/components/container/SideBar'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import Loading from '@/components/ui/loading'
 
 type LayoutProps = {
   children: React.ReactNode
 }
 
 const MainLayout = ({ children }: LayoutProps) => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   return (
-    <div className='h-screen w-full flex flex-col'>
+    <>
+    {status === "loading" ? (
+      <div className='h-screen w-full flex items-center justify-center'>
+              <Loading/>
+            </div>
+    ):(
+      <div className='h-screen w-full flex flex-col'>
         <div className='border-b-2 dark:border-[#171717] w-full py-2 px-3 flex justify-between items-center'>
             <h1 className='font-bold text-lg dark:text-zinc-300 text-zinc-700'>VCommerce</h1>
             <div className='flex items-center gap-3'>
@@ -38,6 +45,8 @@ const MainLayout = ({ children }: LayoutProps) => {
         {children}
         </div>
     </div>
+    )}
+    </>
   )
 }
 
