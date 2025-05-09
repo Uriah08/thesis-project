@@ -1,5 +1,6 @@
 "use client"
 
+import Orb from "@/components/container/Orb";
 import Loading from "@/components/ui/loading";
 import { useSession } from "next-auth/react";
 
@@ -14,7 +15,7 @@ export default function Home() {
     ) : (
       <div className='h-full w-full flex justify-center'>
         <div className='max-w-[1200px] h-screen w-full flex items-center justify-center'>
-          Home
+          <Orb/>
         </div>
     </div>
     )}
