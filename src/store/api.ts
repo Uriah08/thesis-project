@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Agent } from "@/generated/prisma";
+import { Agent } from "@prisma/client";
 
 type AgentResponse = {
     agents: Agent[];

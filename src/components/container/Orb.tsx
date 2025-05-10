@@ -22,6 +22,7 @@ const Orb: React.FC = () => {
     return () => {
       window.removeEventListener("resize", onWindowResize);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const Orb: React.FC = () => {
       console.log("Session ended, resetting the ball");
       resetBallMorph(ballRef.current, originalPositionsRef.current);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [volumeLevel, isSessionActive ]);
 
   const initViz = () => {
@@ -187,9 +189,8 @@ const Orb: React.FC = () => {
   };
 
   return (
-    <div style={{ height: "100%" }}>
+      <div style={{ height: "100%" }}>
       <div
-        id="out"
         className="hover:cursor-pointer"
         onClick={toggleCall}
         style={{ height: "100%", width: "100%" }}
