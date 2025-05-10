@@ -191,6 +191,7 @@ const Orb: React.FC = () => {
   return (
       <div style={{ height: "100%" }}>
       <div
+        id="out"
         className="hover:cursor-pointer"
         onClick={toggleCall}
         style={{ height: "100%", width: "100%" }}
