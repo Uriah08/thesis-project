@@ -1,10 +1,11 @@
 "use client"
 
-// import Orb from "@/components/container/Orb";
 import Loading from "@/components/ui/loading";
 import { useSession } from "next-auth/react";
 import useVapi from "@/components/hooks/use-vapi";
 import { Button } from "@/components/ui/button";
+import ToggleTheme from "@/components/ui/toggle-theme";
+import { toast } from "sonner";
 
 const assistantOptions = {
   name: "VCommerce",
@@ -57,9 +58,8 @@ export default function Home() {
       </div>
     ) : (
       <div className='h-full w-full flex justify-center'>
-        <h1>Hello</h1>
+        <div className='absolute'><h1>Hello</h1><ToggleTheme/></div>
         <div className='max-w-[1200px] h-screen w-full flex items-center justify-center'>
-          {/* <Orb/> */}
           {messages.length  > 0 && (
             <div>{latestMessage}</div>
           )}
@@ -68,6 +68,15 @@ export default function Home() {
           ): (
             <Button className="cursor-pointer" onClick={handleDisconnect}>End</Button>
           )}
+          <Button onClick={() => toast("Hello",{
+            unstyled: true,
+            classNames: {
+              toast: 'bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-4 py-2 rounded-lg max-w-[300px] w-full gap-3',
+              description: 'text-sm text-zinc-600 dark:text-zinc-400',
+            },
+            description: "This is a toast message",
+            
+          })}>Toggle</Button>
         </div>
     </div>
     )}
