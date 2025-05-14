@@ -45,7 +45,7 @@ Just remember: your only job is to help users understand V-Commerce and guide th
 };
 
 const Orb: React.FC = () => {
-  const { volumeLevel, isSessionActive, toggleCall } = useVapi({ assistantOptions });
+  const { volumeLevel, isSpeaking, handleCall } = useVapi({ assistantOptions });
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const groupRef = useRef<THREE.Group | null>(null);
@@ -66,11 +66,11 @@ const Orb: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isSessionActive && ballRef.current) {
+    if (isSpeaking && ballRef.current) {
       console.log("Session is active, morphing the ball");
       updateBallMorph(ballRef.current, volumeLevel);
     } else if (
-      !isSessionActive &&
+      !isSpeaking &&
       ballRef.current &&
       originalPositionsRef.current
     ) {
@@ -78,7 +78,7 @@ const Orb: React.FC = () => {
       resetBallMorph(ballRef.current, originalPositionsRef.current);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [volumeLevel, isSessionActive ]);
+  }, [volumeLevel, isSpeaking ]);
 
   const initViz = () => {
     console.log("Initializing Three.js visualization...");
@@ -233,7 +233,7 @@ const Orb: React.FC = () => {
       <div
         id="out"
         className="hover:cursor-pointer"
-        onClick={toggleCall}
+        onClick={handleCall}
         style={{ height: "100%", width: "100%" }}
       ></div>
     </div>

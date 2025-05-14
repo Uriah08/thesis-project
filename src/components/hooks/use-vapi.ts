@@ -166,6 +166,8 @@
 
 
 import { useEffect, useState } from "react";
+import { vapi } from "@/lib/vapi.sdk";
+import { toast } from "sonner";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -197,6 +199,7 @@ const useVapi = ({ assistantOptions } : { assistantOptions : any}) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMassaged[]>([]);
+  const [volumeLevel, setVolumeLevel] = useState(0);
 
   useEffect(() => {
     const onCallStart = () => setCallStatus(CallStatus.ACTIVE);
@@ -212,9 +215,66 @@ const useVapi = ({ assistantOptions } : { assistantOptions : any}) => {
 
     const onSpeechStart = () => setIsSpeaking(true);
     const onSpeechEnd = () => setIsSpeaking(false);
-  },[])
 
-  const lastMessage = messages[messages.length - 1]
+    const onError = (error: Error) => console.error("Vapi error:", error);
+
+    vapi.on('call-start', onCallStart);
+    vapi.on('call-end', onCallEnd);
+    vapi.on('message', onMessage);
+    vapi.on('speech-start', onSpeechStart);
+    vapi.on('speech-end', onSpeechEnd);
+    vapi.on('error', onError);
+    vapi.on("volume-level", (volume: number) => {
+      setVolumeLevel(volume);
+    });
+
+    return() => {
+      vapi.off('call-start', onCallStart);
+      vapi.off('call-end', onCallEnd);
+      vapi.off('message', onMessage);
+      vapi.off('speech-start', onSpeechStart);
+      vapi.off('speech-end', onSpeechEnd);
+      vapi.off('error', onError);
+      vapi.off("volume-level", (volume: number) => {
+        setVolumeLevel(volume);
+      });
+    }
+  },[messages])
+
+  useEffect(() => {
+    if(callStatus === CallStatus.FINISHED) toast("Call Ended!",{
+      description: "Call again if you need anything else.",
+    })
+  },[callStatus])
+
+  const handleCall = async () => {
+      setCallStatus(CallStatus.STARTING)
+
+      await vapi.start(process.env.NEXT_PUBLIC_VAPI_API_ASSISTANT_ID!, {
+        ...assistantOptions,
+      })
+    }
+    const handleDisconnect = async () => {
+      setCallStatus(CallStatus.INACTIVE)
+
+      vapi.stop()
+    }
+
+    const latestMessage = messages[messages.length - 1]?.content
+    const isCallInactiveOrFinished = callStatus === CallStatus.INACTIVE || callStatus === CallStatus.FINISHED
+
+    return (
+      {
+        volumeLevel,
+        isSpeaking,
+        callStatus,
+        messages,
+        handleCall,
+        handleDisconnect,
+        latestMessage,
+        isCallInactiveOrFinished,
+      }
+    )
 }
 
 export default useVapi
