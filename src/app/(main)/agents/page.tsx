@@ -9,10 +9,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 const AgentPage = () => {
   const { data, isLoading } = useGetAgentsQuery()
   const agents = data?.agents || []
-
-  console.log(agents);
-  
-  
   return (
     <div className='p-5 flex flex-col gap-3'>
       <h1 className='text-3xl font-bold text-[#171717] dark:text-white mb-5'>Your Agents</h1>
@@ -22,9 +18,11 @@ const AgentPage = () => {
           <Skeleton className='h-[120px] w-[240px] rounded-lg'/>
         ) : (
             agents.map((item) => (
-              <div key={item.id} className='hover:bg-zinc-100 dark:hover:bg-zinc-900 duration-200 ease-in-out cursor-pointer border-2 rounded-lg h-[120px] w-[240px] flex p-3'>
-                <h1 className='text-lg font-semibold'>{item.name}</h1>
-              </div>
+              <Link href={`/agents/${item.id}`} key={item.id}>
+                <div className='hover:bg-zinc-100 dark:hover:bg-zinc-900 duration-200 ease-in-out cursor-pointer border-2 rounded-lg h-[120px] w-[240px] flex p-3'>
+                  <h1 className='text-lg font-semibold'>{item.name}</h1>
+                </div>
+              </Link>
             ))
         )}
 

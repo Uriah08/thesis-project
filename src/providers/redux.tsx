@@ -29,9 +29,7 @@ import {
 import { PersistGate } from "redux-persist/integration/react";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import { SessionProvider } from "next-auth/react";
-import { ToastProvider } from "@/components/ui/toaster";
-
-
+import { Toaster } from "@/components/ui/sonner";
 
 /* REDUX PERSISTENCE */
 const createNoopStorage = () => {
@@ -105,7 +103,7 @@ export default function StoreProvider({
       <PersistGate loading={null} persistor={persistor}>
         <SessionProvider>
             {children}
-            <ToastProvider/>
+            <Toaster/>
         </SessionProvider>
       </PersistGate>
     </Provider>
