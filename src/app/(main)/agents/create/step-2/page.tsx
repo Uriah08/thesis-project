@@ -6,9 +6,6 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCreateAgentMutation } from '@/store/api'
 
-
-
-
 const Step2 = () => {
   const router = useRouter()
   const [createAgent] = useCreateAgentMutation()

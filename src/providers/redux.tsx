@@ -103,7 +103,14 @@ export default function StoreProvider({
       <PersistGate loading={null} persistor={persistor}>
         <SessionProvider>
             {children}
-            <Toaster/>
+            <Toaster toastOptions={{
+              unstyled: true,
+              classNames: {
+                title: 'font-semibold',
+                toast: 'bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-4 py-2 rounded-lg max-w-[300px] w-full gap-3',
+                description: 'text-sm text-zinc-600 dark:text-zinc-400',
+              },
+            }}/>
         </SessionProvider>
       </PersistGate>
     </Provider>

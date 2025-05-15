@@ -8,4 +8,4 @@ export const authRoutes = [
 
 export const apiAuthPrefix = "/api/auth"
 
-export const LOGIN_REDIRECT = "/"
+export const LOGIN_REDIRECT = "/dashboard"
