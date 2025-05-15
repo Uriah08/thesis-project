@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-// import { Poppins } from "next/font/google"
+import { Poppins } from "next/font/google"
 import { ThemeProvider } from "next-themes";
 import StoreProvider from "../providers/redux";
 
-// const poppins = Poppins({
-//   subsets: ["latin"],
-//   weight: ["200","300","400", "500", "600", "700","800"],
-// });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["200","300","400", "500", "600", "700","800"],
+});
 
 export const metadata: Metadata = {
   title: "VoiceCommerce",
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased`}
+        className={`${poppins.className} antialiased`}
       >
         <StoreProvider>
           <ThemeProvider
